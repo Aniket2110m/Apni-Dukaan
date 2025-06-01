@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head><title>Shop</title></head>
+<body>
+<h1>Products</h1>
+{% for product in products %}
+  <div>
+    <h2>{{ product.name }}</h2>
+    <p>{{ product.description }}</p>
+    <p>${{ product.price / 100 }}</p>
+    <a href="{{ url_for('add_to_cart', product_id=product.id) }}">Add to Cart</a>
+  </div>
+{% endfor %}
+<a href="{{ url_for('cart') }}">Go to Cart</a>
+</body>
+</html>

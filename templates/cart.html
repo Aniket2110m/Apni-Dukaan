@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <script src="https://js.stripe.com/v3/"></script>
+  <title>Cart</title>
+</head>
+<body>
+<h1>Your Cart</h1>
+{% for item in items %}
+  <div>
+    <p>{{ item.product.name }} - Quantity: {{ item.quantity }}</p>
+  </div>
+{% endfor %}
+<p>Total: ${{ total / 100 }}</p>
+
+<form action="{{ url_for('checkout') }}" method="post" id="payment-form">
+  <script
+    src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+    data-key="{{ key }}"
+    data-amount="{{ total }}"
+    data-name="E-commerce Store"
+    data-description="Checkout"
+    data-currency="usd">
+  </script>
+</form>
+</body>
+</html>
