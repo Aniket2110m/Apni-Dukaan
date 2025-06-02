@@ -169,3 +169,185 @@ body {
     margin-top: 30px;
   }
 }
+.cart-container {
+  max-width: 800px;
+  margin: 40px auto;
+  padding: 20px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 0 15px rgba(0,0,0,0.1);
+}
+
+.cart-container h2 {
+  text-align: center;
+  font-size: 28px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.cart-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 20px;
+}
+
+.cart-table th, .cart-table td {
+  padding: 12px;
+  text-align: center;
+  border-bottom: 1px solid #ddd;
+}
+
+.cart-table th {
+  background-color: #f4f4f4;
+  font-weight: bold;
+}
+
+.cart-summary {
+  text-align: right;
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.btn {
+  padding: 10px 20px;
+  background-color: #0b5ed7;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  text-decoration: none;
+  transition: background 0.3s ease;
+}
+
+.btn:hover {
+  background-color: #084298;
+}
+
+.checkout-btn {
+  margin-top: 10px;
+}
+
+.remove-btn {
+  padding: 6px 12px;
+  font-size: 14px;
+  color: white;
+  background-color: #dc3545;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.remove-btn:hover {
+  background-color: #bb2d3b;
+}
+
+/* Login/Signup container */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  padding: 30px;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Box around forms */
+.auth-box {
+  background: #fff;
+  padding: 40px 30px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+  width: 360px;
+  text-align: center;
+  color: #333;
+}
+
+/* Headings */
+.auth-box h2 {
+  margin-bottom: 20px;
+  font-weight: 700;
+  font-size: 28px;
+  color: #333;
+}
+
+.auth-box h3 {
+  margin-top: 30px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  font-size: 20px;
+  color: #555;
+}
+
+/* Input fields */
+.auth-box label {
+  display: block;
+  text-align: left;
+  font-weight: 600;
+  margin-bottom: 6px;
+  color: #555;
+}
+
+.auth-box input[type="text"],
+.auth-box input[type="password"] {
+  width: 100%;
+  padding: 12px 14px;
+  margin-bottom: 20px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+}
+
+.auth-box input[type="text"]:focus,
+.auth-box input[type="password"]:focus {
+  outline: none;
+  border-color: #764ba2;
+  box-shadow: 0 0 5px #764ba2;
+}
+
+/* Buttons */
+.btn {
+  background-color: #764ba2;
+  color: white;
+  border: none;
+  padding: 14px;
+  width: 100%;
+  font-size: 18px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-top: 5px;
+}
+
+.btn:hover {
+  background-color: #5a3680;
+}
+
+/* Signup button with slightly different style */
+.btn-signup {
+  background-color: #42b983;
+}
+
+.btn-signup:hover {
+  background-color: #2d8655;
+}
+
+/* Error message */
+.error-msg {
+  background-color: #ffdddd;
+  color: #a33;
+  padding: 10px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  font-weight: 600;
+  text-align: center;
+  border: 1px solid #a33;
+}
+
+/* Horizontal line */
+hr {
+  margin: 30px 0 20px 0;
+  border: none;
+  border-top: 1px solid #ddd;
+}

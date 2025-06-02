@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+{% block title %}Checkout{% endblock %}
+{% block content %}
+<h2 style="text-align: center;">Checkout</h2>
+
+<div style="
+    max-width: 500px;
+    margin: 30px auto;
+    padding: 25px;
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+">
+  <form method="POST" style="display: flex; flex-direction: column; gap: 15px;">
+    <label for="name" style="font-weight: bold;">Full Name</label>
+    <input type="text" name="name" id="name" required style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+
+    <label for="email" style="font-weight: bold;">Email Address</label>
+    <input type="email" name="email" id="email" required style="padding: 10px; border-radius: 5px; border: 1px solid #ccc;">
+
+    <label for="address" style="font-weight: bold;">Shipping Address</label>
+    <textarea name="address" id="address" required style="padding: 10px; border-radius: 5px; border: 1px solid #ccc; resize: vertical;" rows="4"></textarea>
+
+    <button type="submit" style="
+        padding: 12px;
+        background: #28a745;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    " onmouseover="this.style.background='#218838'" onmouseout="this.style.background='#28a745'">
+      Place Order
+    </button>
+  </form>
+</div>
+{% endblock %}
