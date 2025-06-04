@@ -1,11 +1,101 @@
 {% extends 'base.html' %}
 {% block title %}My Cart{% endblock %}
 {% block content %}
-<h2>Your Cart</h2>
-{% if items %}
-  <table style="width: 100%; border-collapse: collapse;">
+<style>
+  .cart-container {
+    max-width: 800px;
+    margin: 2rem auto;
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+    font-family: 'Inter', sans-serif;
+  }
+  h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1.5rem;
+  }
+  table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 12px;
+  }
+  thead th {
+    text-align: left;
+    padding-bottom: 0.75rem;
+    border-bottom: 2px solid #5a67d8;
+    color: #5a67d8;
+    font-weight: 700;
+  }
+  tbody tr {
+    background: #f9faff;
+    box-shadow: 0 2px 6px rgba(90, 103, 216, 0.1);
+    transition: background 0.3s ease;
+  }
+  tbody tr:hover {
+    background: #e0e4ff;
+  }
+  tbody td {
+    padding: 0.75rem 1rem;
+    vertical-align: middle;
+    color: #555;
+  }
+  tbody td:last-child a {
+    color: #d53f3f;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1.5px solid #d53f3f;
+    padding: 0.35rem 0.8rem;
+    border-radius: 6px;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+  tbody td:last-child a:hover {
+    background: #d53f3f;
+    color: white;
+  }
+  .total {
+    text-align: right;
+    margin-top: 1.5rem;
+    font-size: 1.3rem;
+    font-weight: 700;
+    color: #222;
+  }
+  .checkout-btn {
+    display: block;
+    width: 100%;
+    max-width: 200px;
+    margin: 2rem auto 0;
+    background: #5a67d8;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 0;
+    cursor: pointer;
+    transition: background 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+  }
+  .checkout-btn:hover {
+    background: #434190;
+  }
+  p.empty {
+    text-align: center;
+    font-size: 1.1rem;
+    color: #777;
+    margin-top: 3rem;
+  }
+</style>
+
+<div class="cart-container">
+  <h2>Your Cart</h2>
+
+  {% if items %}
+  <table>
     <thead>
-      <tr style="text-align: left; border-bottom: 2px solid #ccc;">
+      <tr>
         <th>Name</th>
         <th>Price</th>
         <th>Action</th>
@@ -13,7 +103,7 @@
     </thead>
     <tbody>
       {% for item in items %}
-      <tr style="border-bottom: 1px solid #eee;">
+      <tr>
         <td>{{ item.name }}</td>
         <td>₹{{ item.price }}</td>
         <td><a href="{{ url_for('remove_from_cart', product_id=item.id) }}">Remove</a></td>
@@ -21,9 +111,11 @@
       {% endfor %}
     </tbody>
   </table>
-  <h3>Total: ₹{{ total }}</h3>
-  <a href="{{ url_for('checkout') }}"><button>Proceed to Checkout</button></a>
-{% else %}
-  <p>Your cart is empty.</p>
-{% endif %}
+  <div class="total">Total: ₹{{ total }}</div>
+  <a href="{{ url_for('checkout') }}" class="checkout-btn">Proceed to Checkout</a>
+  {% else %}
+  <p class="empty">Your cart is empty.</p>
+  {% endif %}
+</div>
+
 {% endblock %}
