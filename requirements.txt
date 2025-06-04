@@ -1,4 +1,4 @@
 Flask==2.3.3
 gunicorn==20.1.0  # version may vary
-pip freeze > requirements.txt
+
 
