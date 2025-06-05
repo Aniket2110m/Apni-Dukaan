@@ -1,0 +1,26 @@
+[
+  {
+    "name": "kfmkf",
+    "email": "kwmkw@kkcw",
+    "address": "kkfe",
+    "items": [
+      {
+        "id": 2,
+        "name": "Apple MacBook",
+        "price": 90000,
+        "image": "mac.jpg",
+        "description": "The MacBook with M-series chip delivers powerful performance and energy efficiency, thanks to Apple\u2019s custom silicon..",
+        "rating": 4.2
+      },
+      {
+        "id": 3,
+        "name": "Apple Watch",
+        "price": 35000,
+        "image": "watch.jpg",
+        "description": "The Apple Watch combines fitness tracking, health monitoring, and smart features in a sleek wearable. It offers heart rate tracking and workout detection.",
+        "rating": 4.7
+      }
+    ],
+    "total": 125000
+  }
+]

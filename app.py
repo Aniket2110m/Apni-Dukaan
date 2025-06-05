@@ -6,6 +6,7 @@ app = Flask(__name__)
 app.secret_key = 'your_secret_key'
 
 USER_FILE = 'users.json'
+ORDERS_FILE = 'orders.json'
 
 def load_users():
     if not os.path.exists(USER_FILE):
@@ -16,6 +17,16 @@ def load_users():
 def save_users(users):
     with open(USER_FILE, 'w') as f:
         json.dump(users, f)
+
+def load_orders():
+    if not os.path.exists(ORDERS_FILE):
+        return []
+    with open(ORDERS_FILE, 'r') as f:
+        return json.load(f)
+
+def save_orders(orders):
+    with open(ORDERS_FILE, 'w') as f:
+        json.dump(orders, f, indent=2)
 
 products = [
     {
@@ -141,9 +152,29 @@ def checkout():
         name = request.form.get('name')
         email = request.form.get('email')
         address = request.form.get('address')
+
+        cart = session.get('cart', [])
+        items = [p for p in products if p['id'] in cart]
+        total = sum(p['price'] for p in items)
+
+        orders = load_orders()
+        orders.append({
+            'name': name,
+            'email': email,
+            'address': address,
+            'items': items,
+            'total': total
+        })
+        save_orders(orders)
+
         session['cart'] = []
         return render_template('thankyou.html', name=name)
     return render_template('checkout.html')
+
+@app.route('/admin/orders')
+def view_orders():
+    orders = load_orders()
+    return render_template('orders.html', orders=orders)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 5000))

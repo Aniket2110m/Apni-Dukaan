@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block title %}All Orders{% endblock %}
+
+{% block content %}
+<h2 style="text-align: center; margin-top: 2rem;">All Orders</h2>
+
+{% if orders %}
+    {% for order in orders %}
+    <div style="max-width: 700px; margin: 20px auto; padding: 20px; background: #1e293b; color: #fff; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+        <h3>{{ order.name }} <small style="font-size: 0.8em;">({{ order.email }})</small></h3>
+        <p><strong>Address:</strong> {{ order.address }}</p>
+        <p><strong>Total:</strong> ₹{{ order.total }}</p>
+        <div style="margin-top: 10px;">
+            <strong>Items Ordered:</strong>
+            <ul style="margin-top: 5px;">
+                {% for item in order.items %}
+                    <li>{{ item.name }} – ₹{{ item.price }}</li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endfor %}
+{% else %}
+    <p style="text-align: center; color: #ccc;">No orders found.</p>
+{% endif %}
+{% endblock %}

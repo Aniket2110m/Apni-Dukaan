@@ -1,103 +1,23 @@
 {% extends 'base.html' %}
 {% block title %}Checkout{% endblock %}
+
 {% block content %}
-<style>
-  .checkout-container {
+<h2 style="text-align: center; margin-top: 2rem;">Checkout</h2>
+
+<div style="
     max-width: 500px;
-    margin: 30px auto;
+    margin: 30px auto 60px auto;
     padding: 25px;
-    background: #fff;
+    background: var(--card-bg, #fff);
+    color: var(--text-color, #000);
     border-radius: 10px;
-    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-    color: #222;
-    transition: background 0.3s, color 0.3s;
-  }
-
-  .checkout-container h2 {
-    text-align: center;
-    margin-bottom: 1.5rem;
-    font-weight: 600;
-    color: #2c3e50;
-    transition: color 0.3s ease;
-  }
-
-  /* Dark Mode Styles */
-  body.dark-mode .checkout-container {
-    background: #1e1e1e;
-    color: #e0e0e0;
-    box-shadow: 0 5px 20px rgba(255, 255, 255, 0.05);
-  }
-
-  body.dark-mode .checkout-container h2 {
-    color: #e0e0e0;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-  }
-
-  label {
-    font-weight: bold;
-  }
-
-  input[type="text"],
-  input[type="email"],
-  textarea {
-    padding: 10px;
-    border-radius: 5px;
-    border: 1px solid #ccc;
-    font-family: inherit;
-    font-size: 1rem;
-    transition: border-color 0.3s ease;
-  }
-
-  input[type="text"]:focus,
-  input[type="email"]:focus,
-  textarea:focus {
-    border-color: #3182ce;
-    outline: none;
-  }
-
-  body.dark-mode input[type="text"],
-  body.dark-mode input[type="email"],
-  body.dark-mode textarea {
-    background-color: #333;
-    border: 1px solid #555;
-    color: #e0e0e0;
-  }
-
-  button[type="submit"] {
-    padding: 12px;
-    background: #28a745;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    font-size: 16px;
-    cursor: pointer;
-    font-weight: 600;
-    transition: background 0.3s ease;
-  }
-
-  button[type="submit"]:hover {
-    background: #218838;
-  }
-</style>
-
-<div class="checkout-container">
-  <h2>Checkout</h2>
-  <form method="POST">
-    <label for="name">Full Name</label>
-    <input type="text" name="name" id="name" required />
-
-    <label for="email">Email Address</label>
-    <input type="email" name="email" id="email" required />
-
-    <label for="address">Shipping Address</label>
-    <textarea name="address" id="address" required rows="4"></textarea>
-
-    <button type="submit">Place Order</button>
-  </form>
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+">
+    <form method="POST">
+        <input type="text" name="name" placeholder="Full Name" required style="width: 100%; padding: 10px; margin: 10px 0;" />
+        <input type="email" name="email" placeholder="Email" required style="width: 100%; padding: 10px; margin: 10px 0;" />
+        <textarea name="address" placeholder="Shipping Address" required style="width: 100%; padding: 10px; margin: 10px 0;"></textarea>
+        <button type="submit" style="width: 100%; background-color: #5a67d8; color: white; border: none; padding: 10px; border-radius: 5px;">Place Order</button>
+    </form>
 </div>
 {% endblock %}

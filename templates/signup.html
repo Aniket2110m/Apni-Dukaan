@@ -13,8 +13,6 @@
       align-items: center;
       height: 100vh;
       margin: 0;
-      transition: background 0.3s, color 0.3s;
-      color: #333;
     }
     .signup-box {
       background: #fff;
@@ -24,12 +22,10 @@
       text-align: center;
       width: 100%;
       max-width: 400px;
-      transition: background 0.3s, color 0.3s, box-shadow 0.3s;
-      color: #333;
     }
     .signup-box h2 {
       margin-bottom: 1.5rem;
-      color: inherit;
+      color: #333;
     }
     .signup-box input[type="text"],
     .signup-box input[type="email"],
@@ -40,15 +36,6 @@
       border: 1px solid #ccc;
       border-radius: 6px;
       font-size: 1rem;
-      background: white;
-      color: #333;
-      transition: background 0.3s, color 0.3s, border-color 0.3s;
-    }
-    .signup-box input[type="text"]:focus,
-    .signup-box input[type="email"]:focus,
-    .signup-box input[type="password"]:focus {
-      border-color: #5a67d8;
-      outline: none;
     }
     .signup-box button {
       background: #5a67d8;
@@ -60,63 +47,32 @@
       cursor: pointer;
       margin-top: 1rem;
       width: 100%;
-      transition: background 0.3s ease;
     }
     .signup-box button:hover {
       background: #434190;
     }
     .signup-box p {
       margin-top: 1rem;
-      color: inherit;
     }
     .signup-box a {
       color: #5a67d8;
       text-decoration: none;
-      transition: color 0.3s;
     }
     .signup-box a:hover {
       text-decoration: underline;
-      color: #434190;
     }
     .flash {
-      color: red;
       margin-bottom: 1rem;
-      text-align: left;
+      padding: 0.75rem;
+      border-radius: 6px;
     }
-
-    /* Dark Mode Styles */
-    body.dark-mode {
-      background: #121212;
-      color: #e0e0e0;
+    .flash.error {
+      background-color: #f8d7da;
+      color: #721c24;
     }
-    body.dark-mode .signup-box {
-      background: #2c2c54;
-      color: #e0e0e0;
-      box-shadow: 0 8px 24px rgba(255, 255, 255, 0.05);
-    }
-    body.dark-mode .signup-box input[type="text"],
-    body.dark-mode .signup-box input[type="email"],
-    body.dark-mode .signup-box input[type="password"] {
-      background: #3a3a6d;
-      color: #e0e0e0;
-      border: 1px solid #5a67d8;
-    }
-    body.dark-mode .signup-box input[type="text"]:focus,
-    body.dark-mode .signup-box input[type="email"]:focus,
-    body.dark-mode .signup-box input[type="password"]:focus {
-      border-color: #434190;
-    }
-    body.dark-mode .signup-box a {
-      color: #9bbcff;
-    }
-    body.dark-mode .signup-box a:hover {
-      color: #c0c9ff;
-    }
-    body.dark-mode .signup-box button {
-      background: #434190;
-    }
-    body.dark-mode .signup-box button:hover {
-      background: #5a67d8;
+    .flash.success {
+      background-color: #d4edda;
+      color: #155724;
     }
   </style>
 </head>
@@ -139,12 +95,5 @@
     </form>
     <p>Already have an account? <a href="{{ url_for('login') }}">Login</a></p>
   </div>
-
-  <script>
-    // Dark mode toggle based on localStorage
-    if (localStorage.getItem('dark-mode') === 'enabled') {
-      document.body.classList.add('dark-mode');
-    }
-  </script>
 </body>
 </html>

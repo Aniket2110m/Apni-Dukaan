@@ -1,73 +1,36 @@
-{% extends 'base.html' %}
-{% block title %}Thank You!{% endblock %}
-{% block content %}
-<style>
-  .thankyou-container {
-    max-width: 500px;
-    margin: 5rem auto;
-    background: #fff;
-    padding: 3rem 2rem;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-    text-align: center;
-    font-family: 'Inter', sans-serif;
-    color: #333;
-    opacity: 0;
-    animation: fadeIn 0.8s forwards;
-  }
-  @keyframes fadeIn {
-    to { opacity: 1; }
-  }
-  .thankyou-container h2 {
-    font-size: 2.5rem;
-    margin-bottom: 1rem;
-    color: #5a67d8;
-    transition: color 0.3s ease;
-  }
-  .thankyou-container p {
-    font-size: 1.2rem;
-    margin-bottom: 2rem;
-    color: inherit;
-  }
-  .back-home-btn {
-    display: inline-block;
-    background: #5a67d8;
-    color: white;
-    padding: 0.75rem 2rem;
-    border-radius: 8px;
-    font-weight: 600;
-    font-size: 1.1rem;
-    text-decoration: none;
-    transition: background 0.3s ease;
-  }
-  .back-home-btn:hover,
-  .back-home-btn:focus-visible {
-    background: #434190;
-    outline: none;
-  }
-
-  /* Dark mode support */
-  .dark-mode .thankyou-container {
-    background: #1e1e1e;
-    color: #e0e0e0;
-    box-shadow: 0 8px 24px rgba(255,255,255,0.1);
-  }
-  .dark-mode .thankyou-container h2 {
-    color: #9f7aea; /* softer purple for dark mode */
-  }
-  .dark-mode .back-home-btn {
-    background: #7c3aed;
-    color: #f9f9f9;
-  }
-  .dark-mode .back-home-btn:hover,
-  .dark-mode .back-home-btn:focus-visible {
-    background: #5b21b6;
-  }
-</style>
-
-<div class="thankyou-container">
-  <h2>Thank You, Buddy!</h2>
-  <p>Your order has been placed successfully!</p>
-  <a href="{{ url_for('home') }}" class="back-home-btn">Back to Home</a>
-</div>
-{% endblock %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Confirmation</title>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #e6f7ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .thankyou-box {
+            background: white;
+            padding: 2rem 3rem;
+            border-radius: 10px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        .thankyou-box h1 {
+            color: #007acc;
+        }
+        .thankyou-box p {
+            font-size: 1.2rem;
+            margin-top: 1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="thankyou-box">
+        <h1>🎉 Thank you for your order, {{ name }}!</h1>
+        <p>We’re getting your order ready to be shipped. We’ll notify you when it has been sent.</p>
+    </div>
+</body>
+</html>
