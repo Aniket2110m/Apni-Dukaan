@@ -2,6 +2,19 @@
 {% block title %}Home - Apni Dukaan{% endblock %}
 {% block content %}
 <style>
+  .featured-title {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    font-weight: 700;
+    color: #2c3e50;
+    font-size: 1.75rem;
+    transition: color 0.3s ease;
+  }
+
+  body.dark-mode .featured-title {
+    color: #f1f1f1;
+  }
+
   .product-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -21,6 +34,7 @@
 
   .product-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
   }
 
   .product-card img {
@@ -32,8 +46,8 @@
   }
 
   .product-card h3 {
-    font-size: 1.1rem;
-    font-weight: 600;
+    font-size: 1.15rem;
+    font-weight: 700;
     margin: 0 0 6px;
     color: inherit;
   }
@@ -44,33 +58,45 @@
     color: inherit;
   }
 
+  .product-card p.rating-desc {
+    font-size: 0.85rem;
+    color: #555;
+  }
+
   .product-card a {
     margin-top: auto;
     display: inline-block;
     background: #3b82f6;
     color: white;
-    padding: 8px 16px;
+    padding: 10px 18px;
     border-radius: 8px;
     text-align: center;
     text-decoration: none;
     font-weight: 600;
-    font-size: 0.95rem;
+    font-size: 1rem;
     transition: background 0.3s ease;
   }
 
-  .product-card a:hover {
+  .product-card a:hover,
+  .product-card a:focus {
     background: #2563eb;
+    outline: none;
   }
 
   /* Dark mode */
   .product-card.dark-mode {
     background: #1e1e1e;
     color: #f1f1f1;
+    box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
   }
 
   .product-card.dark-mode p,
   .product-card.dark-mode h3 {
     color: #f1f1f1;
+  }
+
+  .product-card.dark-mode p.rating-desc {
+    color: #ccc;
   }
 
   @media (max-width: 500px) {
@@ -82,30 +108,14 @@
 
 <h2 class="featured-title">🛍️ Featured Products</h2>
 
-<style>
-  .featured-title {
-    margin-bottom: 1rem;
-    text-align: center;
-    font-weight: 600;
-    color: #2c3e50;
-    font-size: 1.5rem;
-    transition: color 0.3s ease;
-  }
-
-  body.dark-mode .featured-title {
-    color: #f1f1f1;
-  }
-</style>
-
-
-<div class="product-grid">
+<div class="product-grid" role="list">
   {% for product in products %}
-    <div class="product-card">
+    <div class="product-card" role="listitem" tabindex="0" aria-label="{{ product.name }} priced at ₹{{ product.price }}">
       <img src="{{ url_for('static', filename='images/' ~ product.image) }}" alt="{{ product.name }}">
       <h3>{{ product.name }}</h3>
       <p>₹{{ product.price }}</p>
-      <p style="font-size: 13px;">⭐ {{ product.rating }} | {{ product.description }}</p>
-      <a href="{{ url_for('add_to_cart', product_id=product.id) }}">Add to Cart</a>
+      <p class="rating-desc">⭐ {{ product.rating }} | {{ product.description }}</p>
+      <a href="{{ url_for('add_to_cart', product_id=product.id) }}" aria-label="Add {{ product.name }} to cart">Add to Cart</a>
     </div>
   {% endfor %}
 </div>

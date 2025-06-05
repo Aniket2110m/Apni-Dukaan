@@ -1,11 +1,42 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Apni Dukaan</title>
-    <link rel="stylesheet" href="/static/style.css">
+  <meta charset="UTF-8" />
+  <title>Apni Dukaan</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <style>
+    body {
+      font-family: 'Inter', sans-serif;
+      background: #f2f3f7;
+      color: #222;
+      margin: 0;
+      padding: 2rem;
+      transition: background 0.3s, color 0.3s;
+      text-align: center;
+    }
+    body.dark-mode {
+      background: #121212;
+      color: #e0e0e0;
+    }
+    h1 {
+      font-weight: 700;
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+    p {
+      font-size: 1.25rem;
+      color: inherit;
+    }
+  </style>
 </head>
 <body>
-    <h1>Welcome to Apni Dukaan</h1>
-    <p>Coming soon: Product Listings</p>
+  <h1>Welcome to Apni Dukaan</h1>
+  <p>Coming soon: Product Listings</p>
+
+  <script>
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+      document.body.classList.add('dark-mode');
+    }
+  </script>
 </body>
 </html>

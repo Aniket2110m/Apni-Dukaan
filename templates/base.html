@@ -6,8 +6,8 @@
   <title>{% block title %}Apni Dukaan{% endblock %}</title>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
+    /* Reset & base */
     * { box-sizing: border-box; }
-
     body {
       font-family: 'Inter', sans-serif;
       background: #f2f3f7;
@@ -17,6 +17,7 @@
       transition: background 0.3s, color 0.3s;
     }
 
+    /* Navigation */
     nav {
       background: #fff;
       padding: 1rem 2rem;
@@ -31,22 +32,22 @@
       color: #333;
       font-weight: 500;
     }
-
     nav a {
       color: #333;
       margin-left: 1rem;
       text-decoration: none;
       font-weight: 500;
       transition: color 0.3s;
+      outline-offset: 2px;
     }
-
     nav a:first-child {
       margin-left: 0;
     }
-
-    nav a:hover {
+    nav a:hover,
+    nav a:focus-visible {
       text-decoration: underline;
       color: #3182ce;
+      outline: none;
     }
 
     /* Brand Title */
@@ -58,6 +59,7 @@
       text-decoration: none;
     }
 
+    /* Container */
     .container {
       max-width: 1000px;
       margin: 2rem auto;
@@ -68,37 +70,35 @@
       transition: background 0.3s, color 0.3s;
     }
 
+    /* Flash messages */
     .flash {
       padding: 10px;
       border-radius: 6px;
       margin-bottom: 1rem;
       font-weight: 500;
     }
-
     .flash.success { background: #e6ffed; color: #2e7d32; }
     .flash.error { background: #ffebee; color: #c62828; }
 
+    /* Dark mode toggle switch */
     .theme-switch {
       display: inline-block;
       width: 50px;
       height: 26px;
       position: relative;
       margin-left: 1rem;
+      cursor: pointer;
     }
-
     .theme-switch input {
       display: none;
     }
-
     .slider {
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background-color: #ccc;
       border-radius: 34px;
       transition: 0.4s;
-      cursor: pointer;
     }
-
     .slider:before {
       content: "";
       position: absolute;
@@ -108,11 +108,9 @@
       border-radius: 50%;
       transition: 0.4s;
     }
-
     input:checked + .slider {
       background-color: #4a5568;
     }
-
     input:checked + .slider:before {
       transform: translateX(24px);
     }
@@ -122,40 +120,22 @@
       background-color: #121212;
       color: #e0e0e0;
     }
-
     .container.dark-mode {
       background: #1e1e1e;
       color: #e0e0e0;
     }
-
-    .product-card.dark-mode {
-      background: #1e1e1e;
-      color: #e0e0e0;
-      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
-    }
-
-    .product-card.dark-mode a {
-      background-color: #3182ce;
-      color: white;
-    }
-
-    .product-card.dark-mode a:hover {
-      background-color: #2b6cb0;
-    }
-
     nav.dark-mode {
       background-color: #222;
       color: #e0e0e0;
     }
-
     nav.dark-mode a {
       color: #e0e0e0;
     }
-
-    nav.dark-mode a:hover {
+    nav.dark-mode a:hover,
+    nav.dark-mode a:focus-visible {
       color: #63b3ed;
+      outline: none;
     }
-
     body.dark-mode .brand-title {
       color: #f1f1f1;
     }
@@ -190,7 +170,7 @@
         <a href="{{ url_for('signup') }}">Sign Up</a>
         <a href="{{ url_for('login') }}">Login</a>
       {% endif %}
-      <label class="theme-switch" title="Toggle Dark Mode">
+      <label class="theme-switch" title="Toggle Dark Mode" aria-label="Toggle Dark Mode">
         <input type="checkbox" id="dark-mode-toggle" />
         <span class="slider"></span>
       </label>
@@ -207,30 +187,30 @@
   </div>
 
   <script>
-    const toggle = document.getElementById('dark-mode-toggle');
-    const body = document.body;
-    const container = document.querySelector('.container');
+    (function() {
+      const toggle = document.getElementById('dark-mode-toggle');
+      const body = document.body;
+      const container = document.querySelector('.container');
+      const navElements = document.querySelectorAll('nav, header');
 
-    if (localStorage.getItem('dark-mode') === 'enabled') {
-      body.classList.add('dark-mode');
-      container.classList.add('dark-mode');
-      toggle.checked = true;
-      document.querySelectorAll('nav, header').forEach(el =>
-        el.classList.add('dark-mode')
-      );
-    }
+      // Apply saved theme on load
+      if (localStorage.getItem('dark-mode') === 'enabled') {
+        body.classList.add('dark-mode');
+        container.classList.add('dark-mode');
+        navElements.forEach(el => el.classList.add('dark-mode'));
+        toggle.checked = true;
+      }
 
-    toggle.addEventListener('change', () => {
-      body.classList.toggle('dark-mode');
-      container.classList.toggle('dark-mode');
-      document.querySelectorAll('.product-card').forEach(card =>
-        card.classList.toggle('dark-mode')
-      );
-      document.querySelectorAll('nav, header').forEach(el =>
-        el.classList.toggle('dark-mode')
-      );
-      localStorage.setItem('dark-mode', body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
-    });
+      // Toggle dark mode on checkbox change
+      toggle.addEventListener('change', () => {
+        body.classList.toggle('dark-mode');
+        container.classList.toggle('dark-mode');
+        navElements.forEach(el => el.classList.toggle('dark-mode'));
+
+        // Update localStorage
+        localStorage.setItem('dark-mode', body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
+      });
+    })();
   </script>
 </body>
 </html>
