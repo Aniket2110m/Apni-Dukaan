@@ -1,24 +1,24 @@
-<!-- Updated base.html with Apple-style minimalist UI and responsive design -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>{% block title %}Apni Dukaan{% endblock %}</title>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet"/>
   <style>
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
+
     body {
       font-family: 'Inter', sans-serif;
       background: #f2f3f7;
+      color: #222;
       margin: 0;
       padding: 0;
-      color: #222;
+      transition: background 0.3s, color 0.3s;
     }
+
     nav {
-      background: #ffffff;
+      background: #fff;
       padding: 1rem 2rem;
       display: flex;
       justify-content: space-between;
@@ -27,16 +27,37 @@
       position: sticky;
       top: 0;
       z-index: 10;
+      transition: background 0.3s, color 0.3s;
+      color: #333;
+      font-weight: 500;
     }
+
     nav a {
       color: #333;
       margin-left: 1rem;
       text-decoration: none;
       font-weight: 500;
+      transition: color 0.3s;
     }
+
+    nav a:first-child {
+      margin-left: 0;
+    }
+
     nav a:hover {
       text-decoration: underline;
+      color: #3182ce;
     }
+
+    /* Brand Title */
+    .brand-title {
+      font-weight: bold;
+      font-size: 1.25rem;
+      color: #2c3e50;
+      transition: color 0.3s ease;
+      text-decoration: none;
+    }
+
     .container {
       max-width: 1000px;
       margin: 2rem auto;
@@ -44,15 +65,102 @@
       padding: 2rem;
       border-radius: 1rem;
       box-shadow: 0 8px 16px rgba(0, 0, 0, 0.05);
+      transition: background 0.3s, color 0.3s;
     }
+
     .flash {
       padding: 10px;
       border-radius: 6px;
       margin-bottom: 1rem;
       font-weight: 500;
     }
+
     .flash.success { background: #e6ffed; color: #2e7d32; }
     .flash.error { background: #ffebee; color: #c62828; }
+
+    .theme-switch {
+      display: inline-block;
+      width: 50px;
+      height: 26px;
+      position: relative;
+      margin-left: 1rem;
+    }
+
+    .theme-switch input {
+      display: none;
+    }
+
+    .slider {
+      position: absolute;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background-color: #ccc;
+      border-radius: 34px;
+      transition: 0.4s;
+      cursor: pointer;
+    }
+
+    .slider:before {
+      content: "";
+      position: absolute;
+      height: 20px; width: 20px;
+      left: 3px; bottom: 3px;
+      background-color: white;
+      border-radius: 50%;
+      transition: 0.4s;
+    }
+
+    input:checked + .slider {
+      background-color: #4a5568;
+    }
+
+    input:checked + .slider:before {
+      transform: translateX(24px);
+    }
+
+    /* Dark Mode Styles */
+    body.dark-mode {
+      background-color: #121212;
+      color: #e0e0e0;
+    }
+
+    .container.dark-mode {
+      background: #1e1e1e;
+      color: #e0e0e0;
+    }
+
+    .product-card.dark-mode {
+      background: #1e1e1e;
+      color: #e0e0e0;
+      box-shadow: 0 4px 12px rgba(255, 255, 255, 0.05);
+    }
+
+    .product-card.dark-mode a {
+      background-color: #3182ce;
+      color: white;
+    }
+
+    .product-card.dark-mode a:hover {
+      background-color: #2b6cb0;
+    }
+
+    nav.dark-mode {
+      background-color: #222;
+      color: #e0e0e0;
+    }
+
+    nav.dark-mode a {
+      color: #e0e0e0;
+    }
+
+    nav.dark-mode a:hover {
+      color: #63b3ed;
+    }
+
+    body.dark-mode .brand-title {
+      color: #f1f1f1;
+    }
+
+    /* Responsive */
     @media (max-width: 600px) {
       nav {
         flex-direction: column;
@@ -61,21 +169,31 @@
       nav a {
         margin: 0.5rem 0 0 0;
       }
+      .theme-switch {
+        margin-left: 0;
+        margin-top: 0.5rem;
+      }
     }
   </style>
 </head>
 <body>
   <nav>
-    <div><a href="{{ url_for('home') }}" style="font-weight: bold; font-size: 1.25rem;">Apni Dukaan</a></div>
     <div>
+      <a href="{{ url_for('home') }}" class="brand-title">Apni Dukaan</a>
+    </div>
+    <div style="display: flex; align-items: center; flex-wrap: wrap;">
       {% if user %}
-        Hello, {{ user }} |
-        <a href="{{ url_for('cart') }}">Cart</a> |
+        <span style="color: inherit;">Hello, {{ user }}</span>
+        <a href="{{ url_for('cart') }}">Cart</a>
         <a href="{{ url_for('logout') }}">Logout</a>
       {% else %}
         <a href="{{ url_for('signup') }}">Sign Up</a>
         <a href="{{ url_for('login') }}">Login</a>
       {% endif %}
+      <label class="theme-switch" title="Toggle Dark Mode">
+        <input type="checkbox" id="dark-mode-toggle" />
+        <span class="slider"></span>
+      </label>
     </div>
   </nav>
 
@@ -87,5 +205,32 @@
     {% endwith %}
     {% block content %}{% endblock %}
   </div>
+
+  <script>
+    const toggle = document.getElementById('dark-mode-toggle');
+    const body = document.body;
+    const container = document.querySelector('.container');
+
+    if (localStorage.getItem('dark-mode') === 'enabled') {
+      body.classList.add('dark-mode');
+      container.classList.add('dark-mode');
+      toggle.checked = true;
+      document.querySelectorAll('nav, header').forEach(el =>
+        el.classList.add('dark-mode')
+      );
+    }
+
+    toggle.addEventListener('change', () => {
+      body.classList.toggle('dark-mode');
+      container.classList.toggle('dark-mode');
+      document.querySelectorAll('.product-card').forEach(card =>
+        card.classList.toggle('dark-mode')
+      );
+      document.querySelectorAll('nav, header').forEach(el =>
+        el.classList.toggle('dark-mode')
+      );
+      localStorage.setItem('dark-mode', body.classList.contains('dark-mode') ? 'enabled' : 'disabled');
+    });
+  </script>
 </body>
 </html>
